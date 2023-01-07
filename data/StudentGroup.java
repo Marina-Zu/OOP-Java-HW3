@@ -2,9 +2,12 @@
 
 package data;
 
+import data.iterator.StudentGroupIterator;
+
+import java.util.Iterator;
 import java.util.List;
 
-public class StudentGroup {
+public class StudentGroup implements Iterable<Student> {
 
     private Teacher teacher;
     private List<Student> studentNames;
@@ -43,5 +46,11 @@ public class StudentGroup {
 
     public void setGroupNumber(int groupNumber) {
         this.groupNumber = groupNumber;
+    }
+
+
+    @Override
+    public Iterator<Student> iterator() {
+        return new StudentGroupIterator(this);
     }
 }
