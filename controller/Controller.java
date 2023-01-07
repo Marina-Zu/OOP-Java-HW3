@@ -1,4 +1,4 @@
-package Task1.controller;
+package controller;
 
 
 import data.GroupStream;
@@ -27,9 +27,9 @@ public class Controller {
         this.groupStream = groupStream;
     }
 
-    public void sortStream (List<GroupStream> groupStream) {
-         groupStream.sort();
-     }
+//    public void sortStream(List<GroupStream> groupStream) {
+//        groupStream.sort();
+//    }
 
 
 }
