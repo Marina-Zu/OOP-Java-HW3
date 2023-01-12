@@ -3,36 +3,31 @@ package controller;
 
 import data.GroupStream;
 import data.StudentGroup;
-import data.comparator.GroupStreamComparator;
-import service.DataServiceGroup;
-import service.StudentGroupServiceImpl;
-import service.StudentServiceImpl;
+import service.*;
 
-import java.util.Comparator;
 import java.util.List;
 
 
 public class Controller {
 
-    private DataServiceGroup studentGroup;
-    private StudentServiceImpl studentService;
-    private StudentGroupServiceImpl sortStudents;
-    private GroupStream groupStream;
+    private final DataService groupService;
+    private final GroupStreamService groupStreamService;
 
-    public Controller(DataServiceGroup studentGroup, StudentServiceImpl studentService,
-                      StudentGroupServiceImpl sortStudents, GroupStream groupStream) {
-        this.studentGroup = studentGroup;
-        this.studentService = studentService;
-        this.sortStudents = sortStudents;
-        this.groupStream = groupStream;
+
+    public Controller(DataService groupService, GroupStreamService groupStreamService) {
+        this.groupService = groupService;
+        this.groupStreamService = groupStreamService;
     }
 
-//    public void sortStream(List<GroupStream> groupStream) {
-//        groupStream.sort();
-//    }
+    public StudentGroup createGroup(int groupNumber) {
+        return groupService.getGroup(groupNumber);
+    }
 
-
+    public void streamListSort(List<GroupStream> groupStream) {
+        groupStreamService.streamSort(groupStream);
+    }
 }
+
 
 
 
