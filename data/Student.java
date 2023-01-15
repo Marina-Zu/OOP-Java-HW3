@@ -22,10 +22,6 @@ public class Student extends User implements Comparable<Student> {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
     @Override
     public int compareTo(Student student) {
         return Integer.compare(this.getAge(), student.getAge());

@@ -32,9 +32,8 @@ public class TerminalReader {
             CommandExecutable commandExecutable = commandExecutableFactory.create(cool);
 
             commandExecutable.execute();
+            scan.close();
         }
-
-
     }
 
-}
+ }

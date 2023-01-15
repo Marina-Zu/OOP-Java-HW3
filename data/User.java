@@ -15,7 +15,7 @@ public abstract class User {
         this.passport = passport;
     }
 
-    public String getFio() {
+    public Student getFio() {
         return fio;
     }
 

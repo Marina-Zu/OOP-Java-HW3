@@ -19,6 +19,17 @@ public class StudentService implements DataService<Student> {
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+    public void deleteStudents(Student student){
+
+    }
+
+    public void deleteStudentsName (Student name){
+
+    }
+
+    public void deleteStudentGroupAndAge (int groupNumber, int age){
+
+    }
 
     @Override
     public Student createUser(Student user) {
@@ -51,9 +62,6 @@ public class StudentService implements DataService<Student> {
         return null;
     }
 
-    public void deleteStudents(Student student){
-
-    }
 
 
 
