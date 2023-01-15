@@ -1,7 +1,6 @@
 import data.Student;
 import data.comparator.UserComparator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -9,9 +8,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Student> sortStudents = Arrays.asList(
-                new Student("Poul", 18, 123, 5),
-                new Student("Kris", 18, 456, 6),
-                new Student("Jack", 19, 789, 5)
+                new Student("Poul", 18, 123, "Mathematics",5),
+                new Student("Kris", 18, 456, "Mathematics", 6),
+                new Student("Jack", 19, 789, "Physics",5)
         );
 
         System.out.println(sortStudents);

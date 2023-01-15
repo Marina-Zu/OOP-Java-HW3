@@ -1,27 +1,30 @@
 package controller;
 
 import data.Student;
-import repository.StudentRepository;
+import service.StudentService;
 
-public class StudentController extends StudentRepository {
-    private StudentController studentController;
+public class StudentController implements UserController<Student, Integer> {
+    private final StudentService studentService;
 
-    public StudentController(StudentController studentController) {
-        this.studentController = studentController;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-    @Override
-    public Student save(Student entity) {
-        return studentController.save(entity);
-    }
 
     @Override
+    public Student create(Student entity) {
+        return studentService.createUser(entity);
+    }
+
+     @Override
     public Student findById(Integer id) {
-        return studentController.findById(id);
+        return studentService.findById(id);
     }
 
     @Override
     public Student findByFio(String fio) {
-        return studentController.findByFio(fio);
+        return studentService.findByFio(fio);
     }
+
+
 }

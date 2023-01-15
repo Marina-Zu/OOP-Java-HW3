@@ -7,31 +7,43 @@ package service;
 
 import data.Student;
 import data.StudentGroup;
-import data.User;
+import data.comparator.UserComparator;
 import repository.StudentRepository;
-import util.ReaderFromTxt;
-import util.WriterToTxt;
 
-public class StudentService implements DataService {
-    private StudentRepository studentRepository;
+import java.util.Collections;
+import java.util.List;
+
+public class StudentService implements DataService<Student> {
+    private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     @Override
-    public void create(User user) {
-        WriterToTxt.write(user);
+    public Student createUser(Student user) {
+        return studentRepository.save(user);
     }
 
     @Override
-    public User read(User user) {
-        return ReaderFromTxt.read(user);
+    public Student findById(Integer id) {
+        return studentRepository.findById(id);
     }
 
     @Override
-    public StudentGroup getGroup() {
-        return null;
+    public Student findByFio(String lastName) {
+        return studentRepository.findByFio(lastName);
+    }
+
+
+    @Override
+    public void sortUsers(List<Student> users) {
+        Collections.sort(users);
+    }
+
+    @Override
+    public void sortUsersByName(List<Student> users) {
+        Collections.sort(users, new UserComparator());
     }
 
     @Override
@@ -39,15 +51,11 @@ public class StudentService implements DataService {
         return null;
     }
 
-    public Student saveStudent(Student entity) {
-        return studentRepository.save(entity);
+    public void deleteStudents(Student student){
+
     }
 
-    public Student findStudentById(int id) {
-        return studentRepository.findById(id);
-    }
 
-    public Student findStudentByFio(String fio) {
-        return studentRepository.findByFio(fio);
-    }
+
+
 }

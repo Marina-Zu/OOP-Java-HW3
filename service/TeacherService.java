@@ -3,43 +3,51 @@ package service;
 import data.StudentGroup;
 import data.Teacher;
 import data.User;
-import repository.Repository;
+import data.comparator.UserComparator;
+import repository.TeacherRepository;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Реализовать методы поиска и сохранения в классе TeacherService
  */
-public class TeacherService implements DataService {
+public class TeacherService implements DataService<Teacher> {
 
-    private final Repository<Teacher, Integer> teacherIntegerRepository;
+    private final TeacherRepository teacherRepository;
 
-    public TeacherService(Repository<Teacher, Integer> teacherIntegerRepository) {
-        this.teacherIntegerRepository = teacherIntegerRepository;
-    }
-
-    public Teacher findTeacher(int groupNumber) {
-        return teacherIntegerRepository.findById(groupNumber);
-    }
-
-    public Teacher saveTeacher(Teacher teacher) {
-        return teacherIntegerRepository.save(teacher);
-    }
-
-    public void create(User user) {
-
+    public TeacherService(TeacherRepository teacherRepository) {
+        this.teacherRepository = teacherRepository;
     }
 
     @Override
-    public User read(User user) {
-        return null;
+    public Teacher createUser(Teacher user) {
+        return teacherRepository.save(user);
     }
 
     @Override
-    public StudentGroup getGroup() {
-        return null;
+    public Teacher findById(Integer id) {
+        return teacherRepository.findById(id);
+    }
+
+    @Override
+    public Teacher findByFio(String lastName) {
+        return teacherRepository.findByFio(lastName);
+    }
+
+    @Override
+    public void sortUsers(List<Teacher> users) {
+        this.sortUsersByName(users);
+    }
+
+    @Override
+    public void sortUsersByName(List<Teacher> users) {
+        Collections.sort(users, new UserComparator());
     }
 
     @Override
     public StudentGroup getGroup(int number) {
         return null;
     }
+
 }
