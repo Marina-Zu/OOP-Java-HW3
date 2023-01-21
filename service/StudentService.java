@@ -16,6 +16,10 @@ import java.util.List;
 public class StudentService implements DataService<Student> {
     private final StudentRepository studentRepository;
 
+//    public StudentService(Repository<Student> studentRepository) {
+//        this.studentRepository = studentRepository;
+//    }
+
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
@@ -23,7 +27,7 @@ public class StudentService implements DataService<Student> {
 
     }
 
-    public void deleteStudentsName (Student name){
+    public void deleteStudentsName (String name){
 
     }
 

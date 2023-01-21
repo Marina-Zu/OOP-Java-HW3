@@ -6,34 +6,35 @@ import java.util.Scanner;
 
 public class TerminalReader {
     private static TerminalReader terminalReader;
-    private CommandParser commandParser;
+    private final CommandParser commandParser;
+    private final CommandExecutableFactory commandExecutableFactory;
 
-    public static TerminalReader getInstance(CommandParser commandParser) {
+    public TerminalReader(CommandParser commandParser, CommandExecutableFactory commandExecutableFactory) {
+        this.commandParser = commandParser;
+        this.commandExecutableFactory = commandExecutableFactory;
+    }
+
+    public static TerminalReader getInstance(CommandParser commandParser,
+                                             CommandExecutableFactory commandExecutableFactory) {
         if (terminalReader == null) {
-            terminalReader = new TerminalReader(commandParser);
+            terminalReader = new TerminalReader(commandParser, commandExecutableFactory);
         }
         return terminalReader;
     }
 
-    public TerminalReader(CommandParser commandParser) {
-        this.commandParser = commandParser;
-    }
-
-    public void getI(int f) {
+    public void runReader(int f) {
         Scanner scan = new Scanner(System.in);
         String command;
         while (true) {
             command = scan.nextLine();
 
-            String[] cool = commandParser.parseCommand(command);
-
-            CommandExecutableFactory commandExecutableFactory = new CommandExecutableFactory();
+            Command cool = commandParser.parseCommand(command);
 
             CommandExecutable commandExecutable = commandExecutableFactory.create(cool);
 
             commandExecutable.execute();
-            scan.close();
+
         }
     }
 
- }
+}

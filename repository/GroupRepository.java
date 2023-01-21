@@ -3,9 +3,11 @@ package repository;
 
 import data.StudentGroup;
 
-/**- Создать класс GroupRepository, имплементировав его от Repository*/
+/**
+ * - Создать класс GroupRepository, имплементировав его от Repository
+ */
 
-public class GroupRepository implements Repository<StudentGroup, Integer>{
+public class GroupRepository implements Repository<StudentGroup, Integer> {
 
 
     @Override

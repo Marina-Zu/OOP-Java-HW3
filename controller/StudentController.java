@@ -1,12 +1,13 @@
 package controller;
 
 import data.Student;
-import service.StudentService;
+import service.DataService;
 
 public class StudentController implements UserController<Student, Integer> {
-    private final StudentService studentService;
+    private final DataService<Student> studentService;  //вместо StudentService поставили абстракцию DataService<Student>
+    // здесь должен быть либо абстрактный интерфейс, либо абстрактный класс (4 принцип SOLID)
 
-    public StudentController(StudentService studentService) {
+    public StudentController(DataService<Student> studentService) {
         this.studentService = studentService;
     }
 

@@ -3,20 +3,17 @@ package terminal.executable;
 import data.Student;
 import service.StudentService;
 
-public class DeleteStudentGroupAndAge implements CommandExecutable{
+public class DeleteStudentNameExecutable implements CommandExecutable{
     private StudentService studentService;
     private Student student;
 
-    private Student studentDel;
-
-    public DeleteStudentGroupAndAge(StudentService studentService, Student student) {
+    public DeleteStudentNameExecutable(StudentService studentService, Student student) {
         this.studentService = studentService;
         this.student = student;
     }
-
     @Override
     public void execute() {
-        studentService.deleteStudentGroupAndAge(student.getGroupNumber(), student.getAge());
+        studentService.deleteStudentsName(student.getFio());
         System.out.println("Студент" + student + "удален из списка \n" );
 
     }
