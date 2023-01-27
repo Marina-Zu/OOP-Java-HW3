@@ -1,7 +1,5 @@
 package data;
 
-import data.User;
-
 public class Teacher extends User {
     private String kafedra;
 
@@ -9,4 +7,11 @@ public class Teacher extends User {
         super(fio, age, passport);
         this.kafedra = kafedra;
     }
+
+    public String getKafedra() {
+        return kafedra;
+    }
+//    public void setRank(String rank) {
+//        this.kafedra = kafedra;
+//    }
 }
