@@ -1,45 +1,44 @@
-/*Создать класс StudentGroupServiceImpl,
-в котором реализована логика чтения Студентов и Преподавателя из файла txt
-(реализация чтения файла опциональна), создания класса StudentGroup и возвращения его.
-*/
+/**
+ * Создать класс StudentGroupServiceImpl,
+ * в котором реализована логика чтения Студентов и Преподавателя из файла txt
+ * (реализация чтения файла опциональна), создания класса StudentGroup и возвращения его.
+ * - В классе StudentGroupServiceImpl добавить новую переменную Repository<Group, Integer>
+ * - В классе StudentGroupServiceImpl реализовать методы сохранения группы и поиска её по номеру
+ */
+
+/**- В классе StudentGroupServiceImpl добавить новую переменную Repository<Group, Integer>
+ - В классе StudentGroupServiceImpl реализовать методы сохранения группы и поиска её по номеру*/
 
 package service;
 
 import data.Student;
 import data.StudentGroup;
-import data.comparator.UserComparator;
+import repository.Repository;
 import util.ReaderFromTxt;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
-public class StudentGroupServiceImpl implements DataServiceGroup{
-    private StudentGroup studentGroup;
+public class StudentGroupServiceImpl implements DataServiceGroup {
+    private final Repository<StudentGroup, Integer> studentGroupIntegerRepository;
 
-    public static void main(String[] args) {
-        List<Student> studentList = Arrays.asList(
-                new Student("Poul", 18, 123, 5),
-                new Student("Kris", 18, 456, 6),
-                new Student("Jack", 19, 789, 5)
-        );
-
-        System.out.println(studentList);
-
-        Collections.sort(studentList, new UserComparator());
-        System.out.println(studentList);
+    public StudentGroupServiceImpl(Repository<StudentGroup, Integer> studentGroupIntegerRepository) {
+        this.studentGroupIntegerRepository = studentGroupIntegerRepository;
     }
 
-    public StudentGroup getGroup(){
+    public StudentGroup saveGroup(StudentGroup studentGroup) {
+        return studentGroupIntegerRepository.save(studentGroup);
+    }
+
+    public StudentGroup findGroup(int groupNumber) {
+        return studentGroupIntegerRepository.findById(groupNumber);
+    }
+
+
+    public StudentGroup getGroup() {
         return new StudentGroup(ReaderFromTxt.getTeacherFromTxt(),
                 ReaderFromTxt.getStudentsFromTxt());
     }
 
-    public void sortStudents(StudentGroup studentGroup){
-        this.studentGroup = studentGroup;
-        Collections.sort(studentGroup.getStudentNames());
-    }
     @Override
     public StudentGroup getGroup(int number) {
         return new StudentGroup
@@ -50,13 +49,13 @@ public class StudentGroupServiceImpl implements DataServiceGroup{
 
     @Override
     public void remove(Student fio) {
-          Iterator<Student> studentGroup = getGroup().iterator();
-          while (studentGroup.hasNext()){
-              Student student = studentGroup.next();
-              if(fio.equals(student.getFio())){
-                  studentGroup.remove();
-              }
-          }
+        Iterator<Student> studentGroup = getGroup().iterator();
+        while (studentGroup.hasNext()) {
+            Student student = studentGroup.next();
+            if (fio.equals(student.getFio())) {
+                studentGroup.remove();
+            }
+        }
     }
 
 
